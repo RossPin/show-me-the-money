@@ -7,6 +7,8 @@ var passport = require('passport')
 var server = express()
 
 const authRoute = require('./routes/auth')
+const meetingsRoute = require('./routes/meetings')
+
 
 server.use(cors('*'))
 
@@ -17,5 +19,6 @@ server.use(express.static(path.join(__dirname, '../public')))
 
 
 server.use('/api/auth', authRoute)
+server.use('/api/meetings', meetingsRoute)
 
 module.exports = server
