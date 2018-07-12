@@ -40,7 +40,7 @@ export function error(err) {
     }
 }
 
-export function addMeeting(meeting) {
+export function postMeeting(meeting) {
   return(dispatch) => {
     dispatch(saveMeeting())
     return request('post', '/api/meetings', meeting)

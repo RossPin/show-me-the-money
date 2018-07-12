@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchMeetings} from './actions/meetings'
+import {fetchMeetings} from '../actions/meetings'
 
 class History extends React.Component {
   constructor(props){
