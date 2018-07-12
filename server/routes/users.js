@@ -1,7 +1,16 @@
+const router = require('express').Router()
+
+const { getUsers } = require('../db/users')
+
+router.get('/', (req, res) => {
+    getUsers()
+        .then((users) => {
+            res.json({ users })
+        })
+        .catch((err) => {
+            res.json(Error[{ message: err }])
+        })
+})
 
 
-
-
-
-
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJKZWZmcmVlIiwiaWF0IjoxNTMxMzQ4ODMyLCJleHAiOjE1MzE0MzUyMzJ9.vaMxaJKi8YuqRDejpN1FWQgeKxvpGWxlljfgnxWuiHA
+module.exports = router

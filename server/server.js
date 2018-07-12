@@ -8,6 +8,7 @@ var server = express()
 
 const authRoute = require('./routes/auth')
 const meetingsRoute = require('./routes/meetings')
+const usersRoute = require('./routes/users')
 
 
 server.use(cors('*'))
@@ -19,6 +20,7 @@ server.use(express.static(path.join(__dirname, '../public')))
 
 
 server.use('/api/auth', authRoute)
+server.use('/api/users', usersRoute)
 server.use('/api/meetings', meetingsRoute)
 
 module.exports = server

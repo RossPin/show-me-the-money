@@ -1,13 +1,18 @@
-const hash = require('../auth/hash')
-
 const db = require('./connection')
 
 
-function postMeeting (meeting) {
+function postMeeting(meeting) {
     return db('meetings')
-    .insert(meeting)
+        .insert(meeting)
 }
 
+function getMeetings() {
+    return db('meetings')
+        .select()
+}
+
+
 module.exports = {
-    postMeeting
+    postMeeting,
+    getMeetings
 }
