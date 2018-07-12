@@ -4,8 +4,10 @@ const { postMeeting, getMeetings } = require('../db/meetings')
 
 
 router.post('/', (req, res) => {
-    let meeting = req.body.meeting
-    console.log(meeting)
+
+    let meeting = req.body
+    delete meeting.attendee_list 
+
     postMeeting(meeting)
         .then((insertedMeetingIds) => {
             meeting.id = insertedMeetingIds[0] // inserting meeting id before return

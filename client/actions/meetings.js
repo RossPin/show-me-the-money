@@ -30,7 +30,7 @@ export function saveMeeting() {
     type: 'SAVING_MEETING',
     isSaving: true
   }
-} 
+}
 
 
 export function error(err) {
@@ -48,7 +48,7 @@ export function postMeeting(meeting) {
       dispatch(addMeeting(res.body.meeting))
     })
     .catch(err => {
-      dispatch(meetingsError(err.message))
+      dispatch(error(err.message))
     })
   }
 }
@@ -58,13 +58,12 @@ export function fetchMeetings() {
   return (dispatch) => {
     dispatch(requestMeetings())
     return request('get', 'meetings')
-    .then((res)=> {      
+    .then((res)=> {
       dispatch(receiveMeetings(res.body.meetings))
     })
     .catch(err => {
-      dispatch(meetingsError(err.message))
+      dispatch(error(err.message))
     })
   }
 
 }
-
