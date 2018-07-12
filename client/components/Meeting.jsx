@@ -11,6 +11,7 @@ class Meeting extends React.Component {
       inProgress: false
     }
     this.clickHandler = this.clickHandler.bind(this)
+    this.addAttendee = this.addAttendee.bind(this)
   }
 
   clickHandler() {
@@ -20,7 +21,7 @@ class Meeting extends React.Component {
   }
 
   addAttendee(attendee){
-    let {attendees} = this.state
+    const {attendees} = this.state
     attendees.push(attendee)
     this.setState({attendees})
   }
@@ -41,12 +42,19 @@ class Meeting extends React.Component {
           </div>
           <div className="column is-6">
             {!inProgress && <AddAttendee addAttendee={this.addAttendee}/>}
-            {inProgress && <CostTracker />}
+            {inProgress && <CostTracker cost={this.props.cost} duration={this.props.duration}/>}
             <button onClick={this.clickHandler} className="button is-large is-fullwidth is-success">{inProgress ? 'End Meeting' : 'Start Meeting'}</button>
           </div>
         </div>
       </div>
-  )
+    )
+  }
+}
+
+const mapStateToProps = ({cost, duration}) => {
+  return {
+    cost,
+    duration
   }
 }
 

@@ -1,17 +1,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {fetchMeetings} from './actions/meetings'
 
 class History extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      meetings: []
+      meetings: this.props.meetings
     }
   }
 
   componentDidMount(){
-    this.setState({meetings: this.props.meetings})
+    this.props.dispatch(fetchMeetings())
   }
 
   render(){
