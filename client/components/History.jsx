@@ -13,6 +13,8 @@ class History extends React.Component {
   }
 
   render(){
+    const meetings = this.props.meetings.meetings
+    console.log(meetings)
     return (
       <div className="container">
         <h2 className="title is-2">Meeting history</h2>
@@ -20,7 +22,7 @@ class History extends React.Component {
           <div className="column is-6">
           <h1 className="title is-2">Past Meetings</h1>
             <ul>
-            {this.props.meetings && this.props.meetings.map(meeting => (
+            {meetings && meetings.map(meeting => (
               <Link key={meeting.id}><li>{meeting.name}</li></Link>
             ))}
             </ul>
