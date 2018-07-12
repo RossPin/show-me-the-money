@@ -4,14 +4,14 @@ import request from '../utils/api'
 
 export function requestMeetings() {
   return {
-    type: 'REQUEST_MEETING',
+    type: 'REQUEST_MEETINGS',
     isFetching: true
   }
 }
 
 export function receiveMeetings(meetings) {
   return {
-    type: 'RECEIVE_MEETING',
+    type: 'RECEIVE_MEETINGS',
     meetings,
     isFetching: false
   }
