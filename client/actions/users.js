@@ -21,9 +21,9 @@ export function receiveUsers(users) {
 export function fetchUsers() {
   return (dispatch) => {
     dispatch(requestUsers())
-    return request('get', '/api/users')
-    .then(users => {
-      dispatch(receiveUsers(users))
+    return request('get', 'users')
+    .then(res => {
+      dispatch(receiveUsers(res.body.users))
     })
     .catch(err => {
       dispatch(error(err))

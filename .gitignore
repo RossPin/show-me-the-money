@@ -6,3 +6,4 @@ bundle.js
 bundle.js.map
 .env
 yarn.lock
+yarn-error.log
