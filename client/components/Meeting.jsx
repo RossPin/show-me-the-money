@@ -17,8 +17,7 @@ class Meeting extends React.Component {
   }
 
   startMeeting(){
-    this.props.dispatch(startMeeting('Meeting' , this.state.attendees))
-    console.log('start meeting')
+    this.props.dispatch(startMeeting('Meeting' , this.state.attendees))   
     setInterval(() => {
       this.props.dispatch(tickOneSecond())
     },1000)
