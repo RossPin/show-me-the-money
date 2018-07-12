@@ -5,6 +5,7 @@ export const initialState = {
   time: 0
 }
 
+
 export function currentMeeting(state = initialState, action) {
   switch (action.type) {
     case "START_MEETING":
