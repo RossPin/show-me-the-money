@@ -1,12 +1,14 @@
-const db = require('./connection')
+const conn = require('./connection')
 
 
-function postMeeting(meeting) {
+function postMeeting(meeting, testDb) {
+  const db = testDb || conn
     return db('meetings')
         .insert(meeting)
 }
 
-function getMeetings() {
+function getMeetings(testDb) {
+  const db = testDb || conn
     return db('meetings')
         .select()
 }

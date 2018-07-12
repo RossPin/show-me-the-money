@@ -13,7 +13,7 @@ class History extends React.Component {
   }
 
   render(){
-    const meetings = this.props.meetings.meetings       
+    const meetings = this.props.meetings.meetings
     return (
       <div className="container">
         <h2 className="title is-2">Meeting history</h2>
@@ -21,7 +21,7 @@ class History extends React.Component {
           <div className="column is-6">
           <h1 className="title is-2">Past Meetings</h1>
             <ul>
-            {meetings && meetings.map(meeting => (
+            {meetings.map(meeting => (
               <li><Link key={meeting.id} to={`/meeting/${meeting.id}`}>{meeting.meeting_name}</Link></li>
             ))}
             </ul>
@@ -36,7 +36,7 @@ class History extends React.Component {
   }
 }
 
-const mapStateToProps = ({meetings}) => {  
+const mapStateToProps = ({meetings}) => {
   return {
     meetings
   }
