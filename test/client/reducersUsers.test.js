@@ -18,3 +18,25 @@ test("Test REQUEST_USERS case", () => {
 
   expect(actual).toEqual(expected)
 })
+
+
+
+test("Test RECEIVE_USERS case", () => {
+
+  const fakeUsers = ["Cate", "Rebecca", "Reuben"]
+
+  const action = {
+    type: "RECEIVE_USERS",
+    users: fakeUsers,
+    isFetching: false
+  }
+
+  const expected = {
+    ...initialState,
+    users: action.users
+  }
+
+  const actual = users(undefined, action)
+
+  expect(actual).toEqual(expected)
+})
