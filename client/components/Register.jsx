@@ -11,7 +11,8 @@ class Register extends React.Component {
       first_name: '',
       last_name: '',
       password: '',
-      confirm_password: ''
+      confirm_password: '',
+      hourly_wage: 0
     }
     this.updateDetails = this.updateDetails.bind(this)
     this.submit = this.submit.bind(this)
@@ -25,7 +26,7 @@ class Register extends React.Component {
   submit(e) {
     e.preventDefault()
     e.target.reset()
-    let {user_name, password, confirm_password, first_name, last_name} = this.state
+    let {user_name, password, confirm_password, first_name, last_name, hourly_wage} = this.state
     if (confirm_password != password) return this.props.dispatch(loginError("Passwords don't match"))
     this.props.dispatch(registerUserRequest(this.state))
   }
@@ -56,6 +57,9 @@ class Register extends React.Component {
             <input required className="input is-large has-text-centered is-fullwidth" placeholder="Confirm Password" type="password" name="confirm_password" onChange={this.updateDetails}/>
           </label>
         </div>
+        <label className="column is-6 is-offset-one-quarter label is-large has-text-centered">Hourly Rate
+          <input required className="input is-large has-text-centered is-fullwidth" placeholder="Hourly Rate" type="text" name="hourly_wage" onChange={this.updateDetails}/>
+        </label>
         <input className="button is-success is-large is-fullwidth" value="Register" type="submit" />
       </form>
     )

@@ -22,7 +22,6 @@ As a user:
   * I want to start my created meeting, and see a ($) cost tracker display the current meeting cost every second
   * I want to be able to save a meeting's cost, attendess, duration and date/time when it is finished for later viewing
   * I want to be able to view previous meetings in date/time order, and see more information about a past meeting.
-  * I want to see a graph of meeting costs over time
 
 ### Stretch
   * I want to be able to select existing users of the App as meeting attendees, so that our wages don't have to be shown / inputted manually. If a meeting attendee doesn't have an account, I want to be able to manually add them to the App.
@@ -30,6 +29,7 @@ As a user:
   * I want to be able to state my yearly salary rather than hourly rate as an option on register
   * I want to be able to view all meetings that I am an attenee for, and I want information about my meetings to not be visible to all users of the app.
   * I want to create a group of regular attendees for my meeting group to make setting up my meeting easier.
+  * I want to see a graph of meeting costs over time
   * I want to be able to write notes or summaries for meetings upon saving them.
 
   ---
@@ -106,7 +106,7 @@ As a user:
   | --- | --- |
   | id | Integer |
   | meeting_name | String |
-  | time | Timestamp |
+  | duration | integer |
   | attendees | integer |
   | cost | Decimal |
 
