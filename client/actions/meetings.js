@@ -4,14 +4,14 @@ import request from '../utils/api'
 
 export function requestMeetings() {
   return {
-    type: 'REQUEST_MEETING',
+    type: 'REQUEST_MEETINGS',
     isFetching: true
   }
 }
 
 export function receiveMeetings(meetings) {
   return {
-    type: 'RECEIVE_MEETING',
+    type: 'RECEIVE_MEETINGS',
     meetings,
     isFetching: false
   }
@@ -40,12 +40,12 @@ export function error(err) {
     }
 }
 
-export function addMeeting(meeting) {
+export function postMeeting(meeting) {
   return(dispatch) => {
     dispatch(saveMeeting())
-    return request('post', '/api/meetings', meeting)
-    .then(() => {
-      dispatch(addMeeting(meeting))
+    return request('post', 'meetings', meeting)
+    .then((res) => {
+      dispatch(addMeeting(res.body.meeting))
     })
     .catch(err => {
       dispatch(meetingsError(err.message))
@@ -57,9 +57,9 @@ export function addMeeting(meeting) {
 export function fetchMeetings() {
   return (dispatch) => {
     dispatch(requestMeetings())
-    return request('get', '/api/meetings')
-    .then((meetings)=> {
-      dispatch(receiveMeetings(meetings))
+    return request('get', 'meetings')
+    .then((res)=> {      
+      dispatch(receiveMeetings(res.body.meetings))
     })
     .catch(err => {
       dispatch(meetingsError(err.message))
