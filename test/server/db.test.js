@@ -23,7 +23,7 @@ test('post meeting db func returns an array with an id', () => {
     attendees: 9001,
     cost: 9002
   }
-  postMeeting(meeting)
+  postMeeting(meeting, testDb)
     .then(array => {
       expect(array.length).toBe(1)
     })
@@ -41,7 +41,7 @@ test('get meetings db returns an array', () => {
       cost: 9002
     }
   ]
-  getMeetings()
+  getMeetings(testDb)
     .then(array => {
       expect(array.length).toBe(1)
     })
@@ -60,7 +60,7 @@ test('get users db returns an array', () => {
       hash: "kdurmchfdkldh73jr74j73jkfg"
     }
   ]
-  getUsers()
+  getUsers(testDb)
     .then(array => {
       expect(array.length).toBe(1)
     })
