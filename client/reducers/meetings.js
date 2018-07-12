@@ -12,9 +12,9 @@ export default function meetings (state = initialState, action) {
       ...state,
       isFetching: true
     }
-    case "RECEIVE_MEETINGS":    
+    case "RECEIVE_MEETINGS":
       return {
-        isSaving: false,
+        ...state,
         meetings : action.meetings,
         isFetching: false
       }
@@ -29,7 +29,7 @@ export default function meetings (state = initialState, action) {
       ...state,
       isSaving: true
     }
-    default: 
+    default:
     return state
   }
-} 
+}
