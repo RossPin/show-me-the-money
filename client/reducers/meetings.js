@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   meetings: [],
   isFetching: false,
   isSaving: false
@@ -14,11 +14,13 @@ export default function meetings (state = initialState, action) {
     }
     case "RECEIVE_MEETINGS":
     return {
+      ...state,
       meetings : action.meetings,
       isFetching: false
     }
     case "ADD_MEETING":
     return {
+      ...state,
       meetings: [...state.meetings, action.meeting],
       isSaving: false
     }

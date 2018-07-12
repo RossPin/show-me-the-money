@@ -6,7 +6,7 @@ export const initialState = {
 }
 
 
-export function currentMeeting(state = initialState, action) {
+export default function currentMeeting(state = initialState, action) {
   switch (action.type) {
     case "START_MEETING":
       return {
@@ -20,11 +20,11 @@ export function currentMeeting(state = initialState, action) {
         ...state,
         inProgress: false
       }
-    case "TICK_ONE-SECOND":
+    case "TICK_ONE_SECOND":
       return {
         ...state,
         inProgress: true,
-        time: state.time++
+        time: state.time + 1
       }
     case "RESET_MEETING":
       return initialState
