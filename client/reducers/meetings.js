@@ -29,6 +29,11 @@ export default function meetings (state = initialState, action) {
       ...state,
       isSaving: true
     }
+    case "ERROR" :
+    console.log(action.err)
+    return {
+      ...state,
+    }
     default:
     return state
   }

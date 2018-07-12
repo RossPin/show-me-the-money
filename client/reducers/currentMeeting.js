@@ -2,7 +2,7 @@ export const initialState = {
   attendees: [],
   meeting_name: '',
   inProgress: false,
-  time: 0
+  duration: 0
 }
 
 
@@ -13,7 +13,7 @@ export default function currentMeeting(state = initialState, action) {
         attendees : action.attendees,
         meeting_name : action.meeting_name,
         inProgress: true,
-        time: 0
+        duration: 0
       }
     case "END_MEETING":
       return {
@@ -24,12 +24,11 @@ export default function currentMeeting(state = initialState, action) {
       return {
         ...state,
         inProgress: true,
-        time: state.time + 1
+        duration: state.duration + 1
       }
     case "RESET_MEETING":
       return initialState
     default:
       return state
   }
-} 
-
+}
