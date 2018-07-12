@@ -19,11 +19,11 @@ test("Test START_MEETING case", () => {
     inProgress: true,
   }
 
-  const expected = {  
+  const expected = {
     attendees: ["test","test","test"],
     meeting_name: "test meeting",
     inProgress: true,
-    time: 0 
+    duration: 0
   }
   const actual = currentMeeting(undefined, action)
 
@@ -42,7 +42,7 @@ test("Test TICK_ONE_SECOND case", () => {
   const expected = {
     ...initialState,
     inProgress: true,
-    time: 1 
+    duration: 1
   }
   const actual = currentMeeting(undefined, action)
 
@@ -64,4 +64,3 @@ test("Test RESET_MEETING case", () => {
 
   expect(actual).toEqual(expected)
 })
-

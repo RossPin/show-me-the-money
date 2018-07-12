@@ -2,7 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import AddAttendee from './AddAttendee'
 import CostTracker from './CostTracker'
-import {startMeeting, tickOneSecond} from '../actions/currentMeeting'
+import {startMeeting, tickOneSecond, endMeeting} from '../actions/currentMeeting'
+import {postMeeting} from '../actions/meetings'
+
+let ticker
 
 class Meeting extends React.Component {
   constructor(props){
@@ -14,17 +17,44 @@ class Meeting extends React.Component {
     this.clickHandler = this.clickHandler.bind(this)
     this.addAttendee = this.addAttendee.bind(this)
     this.startMeeting = this.startMeeting.bind(this)
+    this.endMeeting = this.endMeeting.bind(this)
+    this.calcCosts = this.calcCosts.bind(this)
   }
 
   startMeeting(){
-    this.props.dispatch(startMeeting('Meeting' , this.state.attendees))   
-    setInterval(() => {
+    this.props.dispatch(startMeeting(this.state.attendees, 'Meeting'))
+    ticker = setInterval(() => {
       this.props.dispatch(tickOneSecond())
     },1000)
   }
 
+  endMeeting(){
+    this.props.dispatch(endMeeting())
+    clearInterval(ticker)
+    this.setState({
+      inProgress: false
+    })
+    const {attendees, meeting_name, duration} = this.props.currentMeeting
+    const meeting = {
+      attendees: attendees.length,
+      attendee_list: attendees,
+      meeting_name: meeting_name,
+      duration: duration,
+      cost: this.calcCosts(duration)
+    }
+    this.props.dispatch(postMeeting(meeting))
+  }
+
+  calcCosts(duration){
+    const rate = this.state.attendees.reduce((acc, x) => {
+      return acc + x.hourly_wage
+    },0 )
+    let cost = rate/3600 * duration
+    return Math.round(cost * 100)/100
+  }
+
   clickHandler() {
-    if (!this.state.inProgress) this.startMeeting()
+    this.state.inProgress ? this.endMeeting() : this.startMeeting()
     this.setState({
       inProgress: true
     })
@@ -64,4 +94,10 @@ class Meeting extends React.Component {
   }
 }
 
-export default connect()(Meeting)
+const mapStateToProps = ({currentMeeting}) => {
+  return {
+    currentMeeting
+  }
+}
+
+export default connect(mapStateToProps)(Meeting)
