@@ -9,7 +9,7 @@ const initialState = {
 class AddAttendee extends React.Component {
   constructor(props){
     super (props)
-    this.state = initialState
+    this.state = {...initialState}
 
     this.updateDetails = this.updateDetails.bind(this)
     this.submit = this.submit.bind(this)
@@ -24,7 +24,7 @@ class AddAttendee extends React.Component {
     let {first_name, last_name, hourly_wage} = this.state
     hourly_wage = Number(hourly_wage)
     this.props.addAttendee({first_name, last_name, hourly_wage})
-    this.setState(initialState)
+    this.setState({...initialState})
   }
 
   render() {
