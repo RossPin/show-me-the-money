@@ -43,9 +43,9 @@ export function error(err) {
 export function postMeeting(meeting) {
   return(dispatch) => {
     dispatch(saveMeeting())
-    return request('post', '/api/meetings', meeting)
-    .then(() => {
-      dispatch(addMeeting(meeting))
+    return request('post', 'meetings', meeting)
+    .then((res) => {
+      dispatch(addMeeting(res.body.meeting))
     })
     .catch(err => {
       dispatch(meetingsError(err.message))
@@ -57,9 +57,9 @@ export function postMeeting(meeting) {
 export function fetchMeetings() {
   return (dispatch) => {
     dispatch(requestMeetings())
-    return request('get', '/api/meetings')
-    .then((meetings)=> {
-      dispatch(receiveMeetings(meetings))
+    return request('get', 'meetings')
+    .then((res)=> {      
+      dispatch(receiveMeetings(res.body.meetings))
     })
     .catch(err => {
       dispatch(meetingsError(err.message))

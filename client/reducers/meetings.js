@@ -12,12 +12,12 @@ export default function meetings (state = initialState, action) {
       ...state,
       isFetching: true
     }
-    case "RECEIVE_MEETINGS":
-    return {
-      ...state,
-      meetings : action.meetings,
-      isFetching: false
-    }
+    case "RECEIVE_MEETINGS":    
+      return {
+        isSaving: false,
+        meetings : action.meetings,
+        isFetching: false
+      }
     case "ADD_MEETING":
     return {
       ...state,
