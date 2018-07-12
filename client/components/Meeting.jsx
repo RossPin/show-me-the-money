@@ -11,6 +11,7 @@ class Meeting extends React.Component {
       inProgress: false
     }
     this.clickHandler = this.clickHandler.bind(this)
+    this.addAttendee = this.addAttendee.bind(this)
   }
 
   clickHandler() {
@@ -20,7 +21,7 @@ class Meeting extends React.Component {
   }
 
   addAttendee(attendee){
-    let {attendees} = this.state
+    const {attendees} = this.state
     attendees.push(attendee)
     this.setState({attendees})
   }
@@ -46,7 +47,7 @@ class Meeting extends React.Component {
           </div>
         </div>
       </div>
-  )
+    )
   }
 }
 
