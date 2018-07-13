@@ -13,7 +13,8 @@ class Meeting extends React.Component {
     this.state = {
       attendees: [],
       inProgress: false,
-      meeting_name: ''
+      meeting_name: '',
+      date: 0
     }
     this.clickHandler = this.clickHandler.bind(this)
     this.addAttendee = this.addAttendee.bind(this)
@@ -25,7 +26,8 @@ class Meeting extends React.Component {
 
   startMeeting(){
     this.setState({
-    inProgress: true
+    inProgress: true,
+    date: Date.now()
     })
     this.props.dispatch(startMeeting(this.state.attendees, this.state.meeting_name))
     ticker = setInterval(() => {
@@ -45,7 +47,8 @@ class Meeting extends React.Component {
       attendee_list: attendees,
       meeting_name: meeting_name,
       duration: duration,
-      cost: this.calcCosts(duration)
+      cost: this.calcCosts(duration),
+      date_created: this.state.date
     }
     this.props.dispatch(postMeeting(meeting))
     document.location = "/#/meetingsummary"
