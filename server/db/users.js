@@ -16,7 +16,6 @@ function createUser(user_name, first_name, last_name, hourly_wage, password, tes
 }
 
 function createAttendee(first_name, last_name, hourly_wage, testDb) {
-  console.log(first_name, last_name, hourly_wage)
   const db = testDb || conn
   return db('users')
   .insert({first_name, last_name, hourly_wage})
