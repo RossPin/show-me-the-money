@@ -5,20 +5,19 @@ const { createAttendee } = require('../db/users')
 const { postAttendeesMeetings } = require('../db/attendees')
 
 router.post('/', (req, res) => {
-
     let meeting = req.body
     let attendeeList = [...meeting.attendee_list]
     addAttendeesToUser(attendeeList)
         .then((ids) => {
             delete meeting.attendee_list
             postMeeting(meeting)
-        })
-        .then((insertedMeetingIds) => {
-            addAttendeesMeeting(ids, insertedMeetingIds)
-        })
-        .then(() => {
-            meeting.id = insertedMeetingIds[0] // inserting meeting id before return
-            res.json({ meeting })
+                .then((insertedMeetingIds) => {
+                    meeting.id = insertedMeetingIds[0] 
+                   return addAttendeesMeeting(ids, insertedMeetingIds)
+                })
+                .then(() => {
+                    res.json({ meeting })
+                })
         })
         .catch((err) => {
             res.json(Error[{ message: err }])
