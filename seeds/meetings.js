@@ -5,7 +5,7 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       // Inserts seed entries
       return knex('meetings').insert([
-        {id: 1, meeting_name: 'A Big Big Meeting', duration: 4000, attendees: 4, cost: 1000000}
+        {id: 1, meeting_name: 'A Big Big Meeting', date_created: 0, duration: 4000, attendees: 4, cost: 1000000}
       ]);
     });
 };
