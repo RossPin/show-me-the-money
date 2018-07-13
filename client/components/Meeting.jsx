@@ -4,6 +4,7 @@ import AddAttendee from './AddAttendee'
 import CostTracker from './CostTracker'
 import {startMeeting, tickOneSecond, endMeeting} from '../actions/currentMeeting'
 import {postMeeting} from '../actions/meetings'
+import {fetchUsers} from '../actions/users'
 
 let ticker
 
@@ -74,6 +75,10 @@ class Meeting extends React.Component {
     const {attendees} = this.state
     attendees.push(attendee)
     this.setState({attendees})
+  }
+
+  componentDidMount () {
+    this.props.dispatch(fetchUsers())
   }
 
   render(){
