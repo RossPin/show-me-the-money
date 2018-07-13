@@ -2,18 +2,25 @@ var hash = require('../auth/hash')
 
 const conn = require('./connection')
 
-function createUser(user_name, first_name, last_name, password, testDb) {
+function createUser(user_name, first_name, last_name, hourly_wage, password, testDb) {
   const db = testDb || conn
   return new Promise((resolve, reject) => {
     hash.generate(password, (err, hash) => {
       if (err) reject(err)
       db('users')
-        .insert({ user_name, first_name, last_name, hash })
+        .insert({ user_name, first_name, last_name, hourly_wage, hash })
         .then(user_id => resolve(user_id))
         .catch(err => reject(err))
     })
   })
 }
+
+function createAttendee(first_name, last_name, hourly_wage, testDb) {
+  const db = testDb || conn
+  return db('users')
+  .insert({first_name, last_name, hourly_wage})
+}
+
 
 function userExists(user_name, testDb) {
   const db = testDb || conn
@@ -39,5 +46,6 @@ module.exports = {
   createUser,
   userExists,
   getUserByName,
-  getUsers
+  getUsers,
+  createAttendee
 }
