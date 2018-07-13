@@ -43,6 +43,7 @@ class Meeting extends React.Component {
       cost: this.calcCosts(duration)
     }
     this.props.dispatch(postMeeting(meeting))
+    document.location = "/#/meetingsummary"
   }
 
   calcCosts(duration){

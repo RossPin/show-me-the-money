@@ -5,10 +5,21 @@ import { Link } from 'react-router-dom'
 class MeetingSummary extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+          meeting: {
+            attendee_list: [],
+            meeting_name: '',
+            duration: 0,
+            cost: 0
+          }
+        }
     }
 
-    
-
+    componentWillReceiveProps (nextProps) {
+      this.setState({
+        meeting: nextProps.meetings[nextProps.meetings.length -1]
+      })
+    }
 
     render() {
         return (
@@ -18,17 +29,17 @@ class MeetingSummary extends React.Component {
                     <div className="column is-6">
                         <h2 className="title is-2">Attendees</h2>
                         <ul>
-                            {this.props.meeting.attendee_list.map((attendee, i) => (
+                            {this.state.meeting.attendee_list && this.state.meeting.attendee_list.map((attendee, i) => (
                                 <li key={i}>{attendee.first_name} {attendee.last_name}</li>
                             ))}
                         </ul>
                     </div>
                     <div className="column is-6">
-                        <h2 className='title is-2'>Meeting: {this.props.meeting.meeting_name}</h2>
+                        <h2 className='title is-2'>Meeting: {this.state.meeting.meeting_name}</h2>
                         <br/>
-                        <h3 className='subtitle is-3'>Duration: {this.props.meeting.duration}</h3>
+                        <h3 className='subtitle is-3'>Duration: {this.state.meeting.duration}</h3>
                         <hr />
-                        <h2 className='title-is-2'>Total Cost: ${this.props.meeting.cost}</h2>
+                        <h2 className='title-is-2'>Total Cost: ${this.state.meeting.cost}</h2>
                     </div>
                     <div className="column is-12">
                         <Link className="button is-large is-fullwidth is-success" to="/history">Back</Link>
@@ -39,4 +50,10 @@ class MeetingSummary extends React.Component {
     }
 }
 
-export default connect()(MeetingSummary)
+const mapStateToProps = ({meetings}) => {
+  return {
+    meetings: meetings.meetings
+  }
+}
+
+export default connect(mapStateToProps)(MeetingSummary)
