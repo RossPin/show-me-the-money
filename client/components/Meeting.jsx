@@ -24,6 +24,9 @@ class Meeting extends React.Component {
   }
 
   startMeeting(){
+    this.setState({
+    inProgress: true
+    })
     this.props.dispatch(startMeeting(this.state.attendees, this.state.meeting_name))
     ticker = setInterval(() => {
       this.props.dispatch(tickOneSecond())
