@@ -12,17 +12,19 @@ class Meeting extends React.Component {
     super(props)
     this.state = {
       attendees: [],
-      inProgress: false
+      inProgress: false,
+      meeting_name: ''
     }
     this.clickHandler = this.clickHandler.bind(this)
     this.addAttendee = this.addAttendee.bind(this)
     this.startMeeting = this.startMeeting.bind(this)
     this.endMeeting = this.endMeeting.bind(this)
     this.calcCosts = this.calcCosts.bind(this)
+    this.updateDetails = this.updateDetails.bind(this)
   }
 
   startMeeting(){
-    this.props.dispatch(startMeeting(this.state.attendees, 'Meeting'))
+    this.props.dispatch(startMeeting(this.state.attendees, this.state.meeting_name))
     ticker = setInterval(() => {
       this.props.dispatch(tickOneSecond())
     },1000)
@@ -61,6 +63,10 @@ class Meeting extends React.Component {
     })
   }
 
+  updateDetails(e){
+    this.setState({meeting_name: e.target.value})
+  }
+
   addAttendee(attendee){
     const {attendees} = this.state
     attendees.push(attendee)
@@ -85,7 +91,15 @@ class Meeting extends React.Component {
             </ul>
           </div>
           <div className="column is-6">
-            {!inProgress && <AddAttendee addAttendee={this.addAttendee}/>}
+            {!inProgress && <div><AddAttendee addAttendee={this.addAttendee}/>
+            <form>
+              <div className="field control">
+              <input className="input is-medium" placeholder="Meeting Title" name="meeting_name" onChange={this.updateDetails} value={this.state.meeting_name}/>
+              </div>
+              </form>
+              <br />
+              </div>
+            }
             {inProgress && <CostTracker rate={rate}/>}
             <button onClick={this.clickHandler} className="button is-large is-fullwidth is-success">{inProgress ? 'End Meeting' : 'Start Meeting'}</button>
           </div>

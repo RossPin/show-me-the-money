@@ -22,6 +22,9 @@ class MeetingSummary extends React.Component {
     }
 
     render() {
+      const floor = num => Math.floor(num)
+      const calcCosts = (duration) => ({ hours: floor(duration / 3600), minutes: floor(duration % 3600 / 60), seconds: floor(duration % 60) })
+      const {hours, minutes, seconds} = calcCosts(this.state.meeting.duration)
         return (
             <div className="container">
                 <h2 className="title is-2">Meeting Summary</h2>
@@ -37,9 +40,9 @@ class MeetingSummary extends React.Component {
                     <div className="column is-6">
                         <h2 className='title is-2'>Meeting: {this.state.meeting.meeting_name}</h2>
                         <br/>
-                        <h3 className='subtitle is-3'>Duration: {this.state.meeting.duration}</h3>
+                        <h3 className='subtitle is-3'>Duration: {`${hours}:${minutes}:${seconds}`}</h3>
                         <hr />
-                        <h2 className='title-is-2'>Total Cost: ${this.state.meeting.cost}</h2>
+                        <h2 className='title is-2'>Total Cost: ${this.state.meeting.cost}</h2>
                     </div>
                     <div className="column is-12">
                         <Link className="button is-large is-fullwidth is-success" to="/history">Back</Link>
