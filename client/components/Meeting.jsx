@@ -63,9 +63,6 @@ class Meeting extends React.Component {
 
   clickHandler() {
     this.state.inProgress ? this.endMeeting() : this.startMeeting()
-    this.setState({
-      inProgress: true
-    })
   }
 
   updateDetails(e){

@@ -56,6 +56,7 @@ class MeetingSummary extends React.Component {
     }
 }
 
+
 const mapStateToProps = ({meetings}) => {
   return {
     meetings: meetings.meetings
