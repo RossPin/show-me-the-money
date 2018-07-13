@@ -10,18 +10,19 @@ router.post('/', (req, res) => {
     let attendeeList = [...meeting.attendee_list]
     addAttendeesToUser(attendeeList)
         .then((ids) => {
-        delete meeting.attendee_list
-        postMeeting(meeting)
-            .then((insertedMeetingIds) => {
-                addAttendeesMeeting(ids, insertedMeetingIds).then(() => {
-                meeting.id = insertedMeetingIds[0] // inserting meeting id before return
-                res.json({ meeting })
-            })
-           
-            })
-        }) .catch((err) => {
-                res.json(Error[{ message: err }])
-    })
+            delete meeting.attendee_list
+            postMeeting(meeting)
+        })
+        .then((insertedMeetingIds) => {
+            addAttendeesMeeting(ids, insertedMeetingIds)
+        })
+        .then(() => {
+            meeting.id = insertedMeetingIds[0] // inserting meeting id before return
+            res.json({ meeting })
+        })
+        .catch((err) => {
+            res.json(Error[{ message: err }])
+        })
 })
 
 router.get('/', (req, res) => {
@@ -37,7 +38,7 @@ router.get('/', (req, res) => {
 function addAttendeesMeeting(ids, insertedMeetingIds) {
     const attendeesMeetingData = []
     ids.forEach((id) => {
-        attendeesMeetingData.push({user_id: id, meeting_id: insertedMeetingIds[0]})
+        attendeesMeetingData.push({ user_id: id, meeting_id: insertedMeetingIds[0] })
     })
     return postAttendeesMeetings(attendeesMeetingData)
 }
