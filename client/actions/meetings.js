@@ -45,7 +45,9 @@ export function postMeeting(meeting) {
     dispatch(saveMeeting())
     return request('post', 'meetings', meeting)
     .then((res) => {
-      dispatch(addMeeting(res.body.meeting))
+      const meetingResponse = res.body.meeting
+      meetingResponse.attendee_list = meeting.attendee_list
+      dispatch(addMeeting(meetingResponse))
     })
     .catch(err => {
       dispatch(error(err.message))

@@ -27,7 +27,7 @@ class History extends React.Component {
             </ul>
           </div>
           <div className="column is-6">
-            <img src="http://via.placeholder.com/350x150" />
+            <img src="/meetingImage.jpeg" />
             <Link className="button is-large is-fullwidth is-success" to="/meeting">Create New Meeting</Link>
           </div>
         </div>

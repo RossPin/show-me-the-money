@@ -1,16 +1,32 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 class MeetingSummary extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+          meeting: {
+            attendee_list: [],
+            meeting_name: '',
+            duration: 0,
+            cost: 0,
+            date_created: 1531445529237,
+          }
+        }
     }
 
-    
-
+    componentWillReceiveProps (nextProps) {
+      this.setState({
+        meeting: nextProps.meetings[nextProps.meetings.length -1]
+      })
+    }
 
     render() {
+      const floor = num => Math.floor(num)
+      const calcCosts = (duration) => ({ hours: floor(duration / 3600), minutes: floor(duration % 3600 / 60), seconds: floor(duration % 60) })
+      const {hours, minutes, seconds} = calcCosts(this.state.meeting.duration)
         return (
             <div className="container">
                 <h2 className="title is-2">Meeting Summary</h2>
@@ -18,17 +34,18 @@ class MeetingSummary extends React.Component {
                     <div className="column is-6">
                         <h2 className="title is-2">Attendees</h2>
                         <ul>
-                            {this.props.meeting.attendee_list.map((attendee, i) => (
+                            {this.state.meeting.attendee_list && this.state.meeting.attendee_list.map((attendee, i) => (
                                 <li key={i}>{attendee.first_name} {attendee.last_name}</li>
                             ))}
                         </ul>
                     </div>
                     <div className="column is-6">
-                        <h2 className='title is-2'>Meeting: {this.props.meeting.meeting_name}</h2>
+                        <h2 className='title is-2'>Meeting: {this.state.meeting.meeting_name}</h2>
+                        <h4 className='subtitle is-4'>{moment(this.state.meeting.date_created).format('hh:mm a DD/MM/YY')}</h4>
                         <br/>
-                        <h3 className='subtitle is-3'>Duration: {this.props.meeting.duration}</h3>
+                        <h3 className='subtitle is-3'>Duration: {`${hours}:${minutes}:${seconds}`}</h3>
                         <hr />
-                        <h2 className='title-is-2'>Total Cost: ${this.props.meeting.cost}</h2>
+                        <h2 className='title is-2'>Total Cost: ${this.state.meeting.cost}</h2>
                     </div>
                     <div className="column is-12">
                         <Link className="button is-large is-fullwidth is-success" to="/history">Back</Link>
@@ -39,4 +56,11 @@ class MeetingSummary extends React.Component {
     }
 }
 
-export default connect()(MeetingSummary)
+
+const mapStateToProps = ({meetings}) => {
+  return {
+    meetings: meetings.meetings
+  }
+}
+
+export default connect(mapStateToProps)(MeetingSummary)
