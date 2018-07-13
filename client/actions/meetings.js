@@ -48,7 +48,6 @@ export function postMeeting(meeting) {
       const meetingResponse = res.body.meeting
       meetingResponse.attendee_list = meeting.attendee_list
       dispatch(addMeeting(meetingResponse))
-      document.location = "/#/meetingsummary"
     })
     .catch(err => {
       dispatch(error(err.message))
