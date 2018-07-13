@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 class MeetingSummary extends React.Component {
     constructor(props) {
@@ -24,7 +25,7 @@ class MeetingSummary extends React.Component {
                         </ul>
                     </div>
                     <div className="column is-6">
-                        <h2 className='title is-2'>Meeting: {this.props.meeting.meeting_name}</h2>
+                        <h2 className='title is-2'>Meeting: {this.props.meeting.meeting_name} - {moment(this.props.meeting.date_created).format('Do MMMM YYYY')}</h2>
                         <br/>
                         <h3 className='subtitle is-3'>Duration: {this.props.meeting.duration}</h3>
                         <hr />
