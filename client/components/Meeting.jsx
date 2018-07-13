@@ -22,6 +22,9 @@ class Meeting extends React.Component {
   }
 
   startMeeting(){
+    this.setState({
+      inProgress: true
+    })
     this.props.dispatch(startMeeting(this.state.attendees, 'Meeting'))
     ticker = setInterval(() => {
       this.props.dispatch(tickOneSecond())
@@ -55,9 +58,6 @@ class Meeting extends React.Component {
 
   clickHandler() {
     this.state.inProgress ? this.endMeeting() : this.startMeeting()
-    this.setState({
-      inProgress: true
-    })
   }
 
   addAttendee(attendee){
