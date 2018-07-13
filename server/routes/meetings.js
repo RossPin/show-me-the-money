@@ -8,7 +8,8 @@ router.post('/', (req, res) => {
 
     let meeting = req.body
     let attendeeList = [...meeting.attendee_list]
-    addAttendeesToUser(attendeeList).then((ids) => {
+    addAttendeesToUser(attendeeList)
+        .then((ids) => {
         delete meeting.attendee_list
         postMeeting(meeting)
             .then((insertedMeetingIds) => {
@@ -16,10 +17,10 @@ router.post('/', (req, res) => {
                 meeting.id = insertedMeetingIds[0] // inserting meeting id before return
                 res.json({ meeting })
             })
-            .catch((err) => {
-                res.json(Error[{ message: err }])
+           
             })
-        })
+        }) .catch((err) => {
+                res.json(Error[{ message: err }])
     })
 })
 
