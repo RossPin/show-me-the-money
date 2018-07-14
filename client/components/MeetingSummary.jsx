@@ -21,10 +21,8 @@ class MeetingSummary extends React.Component {
     componentDidMount(){        
         const id = this.props.match.params.id       
         request('get', 'meetings/'+id)
-            .then((res)=> {
-                console.log(res)
-            const meeting = res.body.meeting
-            console.log(meeting)
+            .then((res)=> {                
+            const meeting = res.body.meeting            
             })
             .catch(err => {
             console.log(err.message)
