@@ -35,8 +35,7 @@ class AddAttendee extends React.Component {
     })
   }
 
-  render() {
-    console.log(this.state.users);
+  render() {    
     return(
       <div>
         <div className="dropdown is-hoverable">
