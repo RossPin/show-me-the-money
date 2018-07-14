@@ -52,7 +52,7 @@ class Meeting extends React.Component {
       date_created: this.state.date
     }
     this.props.dispatch(postMeeting(meeting))
-    this.props.history.push('/meetingsummary')
+    //this.props.history.push('/meetingsummary')
   }
 
   calcCosts(duration){

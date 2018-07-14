@@ -1,6 +1,6 @@
 const router = require('express').Router()
 
-const { postMeeting, getMeetings } = require('../db/meetings')
+const { postMeeting, getMeetings, getMeeting } = require('../db/meetings')
 const { createAttendee } = require('../db/users')
 const { postAttendeesMeetings } = require('../db/attendees')
 
@@ -30,6 +30,19 @@ router.get('/', (req, res) => {
             res.json({ meetings })
         })
         .catch((err) => {
+            res.json(Error[{ message: err }])
+        })
+})
+
+router.get('/:id', (req, res) => {
+    id = req.query.id
+    getMeeting(id)
+        .then((meeting) => {
+            console.log(meeting)
+            res.json({ meeting })
+        })
+        .catch((err) => {
+            console.log(err)
             res.json(Error[{ message: err }])
         })
 })

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+import request from '../utils/api'
 
 class MeetingSummary extends React.Component {
     constructor(props) {
@@ -17,13 +18,26 @@ class MeetingSummary extends React.Component {
         }
     }
 
+    componentDidMount(){        
+        const id = this.props.match.params.id       
+        request('get', 'meetings/'+id)
+            .then((res)=> {
+                console.log(res)
+            const meeting = res.body.meeting
+            console.log(meeting)
+            })
+            .catch(err => {
+            console.log(err.message)
+            })
+    }
+
     componentWillReceiveProps (nextProps) {
       this.setState({
         meeting: nextProps.meetings[nextProps.meetings.length -1]
       })
     }
 
-    render() {
+    render() {       
       const floor = num => Math.floor(num)
       const calcCosts = (duration) => ({ hours: floor(duration / 3600), minutes: floor(duration % 3600 / 60), seconds: floor(duration % 60) })
       const {hours, minutes, seconds} = calcCosts(this.state.meeting.duration)
