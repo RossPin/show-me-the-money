@@ -45,8 +45,7 @@ export function postMeeting(meeting) {
     dispatch(saveMeeting())
     return request('post', 'meetings', meeting)
     .then((res) => {
-      const meetingResponse = res.body.meeting
-      meetingResponse.attendee_list = meeting.attendee_list
+      const meetingResponse = res.body.meeting            
       dispatch(addMeeting(meetingResponse))
       document.location = "/#/meeting/" + meetingResponse.id
     })

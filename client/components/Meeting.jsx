@@ -42,7 +42,7 @@ class Meeting extends React.Component {
     this.setState({
       inProgress: false
     })
-    const {attendees, meeting_name, duration} = this.props.currentMeeting
+    const {attendees, meeting_name, duration} = this.props.currentMeeting    
     const meeting = {
       attendees: attendees.length,
       attendee_list: attendees,
@@ -71,7 +71,7 @@ class Meeting extends React.Component {
     this.setState({meeting_name: e.target.value})
   }
 
-  addAttendee(attendee){
+  addAttendee(attendee){    
     const {attendees} = this.state
     attendees.push(attendee)
     this.setState({attendees})

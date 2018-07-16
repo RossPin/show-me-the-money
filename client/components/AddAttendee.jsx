@@ -29,7 +29,7 @@ class AddAttendee extends React.Component {
     this.setState({...initialState})
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps) {    
     this.setState ({
       users: nextProps.users
     })
