@@ -13,7 +13,7 @@ function getMeetings(testDb) {
         .select()
 }
 
-function getMeeting (id, testDb) {
+function getMeeting (id, testDb) {  
   const db = testDb || conn
   return db('meetings')
   .where('meetings.id', id)
@@ -27,8 +27,9 @@ function getMeeting (id, testDb) {
     meeting.cost = rawAttendees[0].cost
     meeting.id = rawAttendees[0].meeting_id
     meeting.attendees = rawAttendees[0].attendees
+    meeting.date_created = rawAttendees[0].date_created
 
-    let attendeesList = []
+    let attendeeList = []
 
     rawAttendees.forEach((user) => {
       delete user.id
@@ -40,11 +41,12 @@ function getMeeting (id, testDb) {
       delete user.meeting_id
       delete user.hourly_wage
       delete user.hash
-      attendeesList.push(user)
+      delete user.date_created
+      attendeeList.push(user)
       return user
     })
 
-    meeting.attendees_list = attendeesList
+    meeting.attendee_list = attendeeList
     return meeting
   })
 }

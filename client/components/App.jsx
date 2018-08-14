@@ -28,9 +28,9 @@ const App = ({auth}) => (
         }
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-        <Route path="/meeting" component={Meeting} />
+        <Route exact path="/meeting" component={Meeting} />
         <Route path="/history" component={History} />
-        <Route path='/meetingsummary' component={MeetingSummary} />
+        <Route path='/meeting/:id' component={MeetingSummary} />
       </div>
 
     </div>
