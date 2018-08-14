@@ -3,8 +3,8 @@ const conn = require('./connection')
 
 function postMeeting(meeting, testDb) {
   const db = testDb || conn
-    return db('meetings')
-        .insert(meeting)
+    return db.insert([meeting], 'id')
+      .into('meetings')
 }
 
 function getMeetings(testDb) {
