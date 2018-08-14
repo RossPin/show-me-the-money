@@ -12,9 +12,9 @@ const CostTracker = props => {
     return(
       <div>
         <h2 className="title is-2">Meeting Duration</h2>
-        <h1 className="title is-2">{`${hours}:${minutes}:${seconds}`}</h1>
+        <h1 className="title is-2">{`${hours}:${("00" + minutes).slice(-2)}:${("00" + seconds).slice(-2)}`}</h1>
         <h2 className="title is-2">Cost </h2>
-        <h1 className="title is-2">${cost}</h1>
+        <h1 className="title is-2">${cost.toFixed(2)}</h1>
         <br />
       </div>
     )
