@@ -28,7 +28,7 @@ class Meeting extends React.Component {
   startMeeting(){
     this.setState({
     inProgress: true,
-    date: Date.now()
+    date: Math.round(Date.now()/1000)
     })
     this.props.dispatch(startMeeting(this.state.attendees, this.state.meeting_name))
     ticker = setInterval(() => {
