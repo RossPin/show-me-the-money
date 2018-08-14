@@ -13,7 +13,7 @@ class MeetingSummary extends React.Component {
             meeting_name: '',
             duration: 0,
             cost: 0,
-            date_created: 1531445529237,
+            date_created: 0,
           }
         }
     }
@@ -53,7 +53,7 @@ class MeetingSummary extends React.Component {
                     </div>
                     <div className="column is-6">
                         <h2 className='title is-2'>Meeting: {this.state.meeting.meeting_name}</h2>
-                        <h4 className='subtitle is-4'>{moment(this.state.meeting.date_created).format('hh:mm a DD/MM/YY')}</h4>
+                        <h4 className='subtitle is-4'>{(this.state.meeting.date_created > 0) && moment(this.state.meeting.date_created*1000).format('hh:mm a DD/MM/YY')}</h4>
                         <br/>
                         <h3 className='subtitle is-3'>Duration: {`${hours}:${("00" + minutes).slice(-2)}:${("00" + seconds).slice(-2)}`}</h3>
                         <hr />
