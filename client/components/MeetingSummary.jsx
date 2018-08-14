@@ -57,7 +57,7 @@ class MeetingSummary extends React.Component {
                         <br/>
                         <h3 className='subtitle is-3'>Duration: {`${hours}:${("00" + minutes).slice(-2)}:${("00" + seconds).slice(-2)}`}</h3>
                         <hr />
-                        <h2 className='title is-2'>Total Cost: ${this.state.meeting.cost.toFixed(2)}</h2>
+                        <h2 className='title is-2'>Total Cost: ${Number(this.state.meeting.cost).toFixed(2)}</h2>
                     </div>
                     <div className="column is-12">
                         <Link className="button is-large is-fullwidth is-success" to="/history">Back</Link>
