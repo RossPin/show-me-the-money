@@ -57,7 +57,7 @@ class Meeting extends React.Component {
 
   calcCosts(duration){
     const rate = this.state.attendees.reduce((acc, x) => {
-      return acc + x.hourly_wage
+      return acc + Number(x.hourly_wage)
     },0 )
     let cost = rate/3600 * duration
     return Math.round(cost * 100)/100
@@ -84,7 +84,7 @@ class Meeting extends React.Component {
   render(){
     const inProgress = this.state.inProgress
     const rate = this.state.attendees.reduce((acc, x) => {
-      return acc + x.hourly_wage
+      return acc + Number(x.hourly_wage)
     },0 )
     return (
       <div className="container">
