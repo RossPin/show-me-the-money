@@ -11,6 +11,8 @@ This cost is calculated based on the hourly wages of the meeting's attendees and
 
 The intended effect of this App is to make meeting attendees aware of how much this time is costing the business.
 
+published at https://show-money.herokuapp.com
+
 
 ## User Stories
 
